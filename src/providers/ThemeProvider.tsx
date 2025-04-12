@@ -35,13 +35,20 @@ const defaultDarkColors: ThemeColors = {
   destructiveForeground: "hsl(210 40% 98%)",
 };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+// Create a context with a default value to avoid the undefined check
+const initialThemeState: ThemeState = {
+  mode: 'system',
+  colors: defaultLightColors,
+};
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: initialThemeState,
+  setMode: () => {},
+  setColors: () => {},
+});
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
   return context;
 };
 

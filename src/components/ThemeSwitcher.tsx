@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { ThemeMode } from "@/types/theme";
-import { useTheme as useNextTheme } from "next-themes";
 
 const presetThemes = {
   default: {},
@@ -41,19 +40,12 @@ const presetThemes = {
 
 export function ThemeSwitcher() {
   const { theme, setMode, setColors } = useTheme();
-  const { setTheme } = useNextTheme();
   const [mounted, setMounted] = useState(false);
 
   // Ensure theme change is only shown after mounting to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Update both theme providers when mode changes
-  const handleModeChange = (value: ThemeMode) => {
-    setMode(value);
-    setTheme(value);
-  };
 
   // Apply preset theme colors
   const applyThemePreset = (presetName: keyof typeof presetThemes) => {
@@ -63,6 +55,13 @@ export function ThemeSwitcher() {
   if (!mounted) {
     return null;
   }
+
+  // Updated to handle theme changes from our custom context
+  const handleModeChange = (value: ThemeMode) => {
+    setMode(value);
+  };
+
+  console.log("ThemeSwitcher rendering with theme:", theme);
 
   return (
     <DropdownMenu>
