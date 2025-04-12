@@ -21,9 +21,3 @@ export interface ThemeState {
   mode: ThemeMode;
   colors: ThemeColors;
 }
-
-export interface ThemeContextType {
-  theme: ThemeState;
-  setMode: (mode: ThemeMode) => void;
-  setColors: (colors: Partial<ThemeColors>) => void;
-}

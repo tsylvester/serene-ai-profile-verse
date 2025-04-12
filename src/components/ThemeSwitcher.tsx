@@ -1,7 +1,6 @@
 
-import { Moon, Sun, PaintBucket } from "lucide-react";
-import { useTheme } from "@/providers/ThemeProvider";
-import { useTheme as useNextTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -9,104 +8,40 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
-import { ThemeMode } from "@/types/theme";
-
-const presetThemes = {
-  default: {},
-  blue: {
-    primary: "hsl(221 83% 53%)",
-    accent: "hsl(217 91% 60%)",
-  },
-  green: {
-    primary: "hsl(142 76% 36%)",
-    accent: "hsl(142 71% 45%)",
-  },
-  purple: {
-    primary: "hsl(280 67% 55%)",
-    accent: "hsl(270 58% 58%)",
-  },
-  amber: {
-    primary: "hsl(38 92% 50%)",
-    accent: "hsl(43 96% 58%)",
-  },
-};
 
 export function ThemeSwitcher() {
-  const { theme, setMode, setColors } = useTheme();
-  const { setTheme, theme: nextTheme } = useNextTheme();
+  const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Ensure theme change is only shown after mounting to avoid hydration mismatch
+  // Avoid hydration mismatch by only rendering after mount
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Apply preset theme colors
-  const applyThemePreset = (presetName: keyof typeof presetThemes) => {
-    setColors(presetThemes[presetName]);
-  };
 
   if (!mounted) {
     return null;
   }
 
-  // Update both theme providers when mode changes
-  const handleModeChange = (value: ThemeMode) => {
-    setMode(value);
-    setTheme(value);
-  };
-
-  // Determine which icon to show based on the next-themes provider
-  const displayedTheme = nextTheme || theme.mode;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="rounded-full">
-          {displayedTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          {theme === "light" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuRadioGroup value={theme.mode} onValueChange={handleModeChange}>
-          <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="system">System</DropdownMenuRadioItem>
-        </DropdownMenuRadioGroup>
-        
-        <DropdownMenuSeparator />
-        
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <PaintBucket className="mr-2 h-4 w-4" />
-            <span>Theme Colors</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuItem onClick={() => applyThemePreset('default')}>
-              Default
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => applyThemePreset('blue')}>
-              Blue
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => applyThemePreset('green')}>
-              Green
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => applyThemePreset('purple')}>
-              Purple
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => applyThemePreset('amber')}>
-              Amber
-            </DropdownMenuItem>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
+        <DropdownMenuItem onClick={() => setTheme("light")}>
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>
+          System
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
