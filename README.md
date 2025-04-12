@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
 
-## Project info
+# SaaS Framework Template
 
-**URL**: https://lovable.dev/projects/1137485e-7fe7-42f9-90e1-eb7c7df1296b
+A comprehensive starter template for building modern SaaS applications with authentication, payments, and AI capabilities.
 
-## How can I edit this code?
+## Project Structure
 
-There are several ways of editing your application.
+This project is organized as follows:
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/1137485e-7fe7-42f9-90e1-eb7c7df1296b) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/          # UI components
+│   ├── ui/              # shadcn/ui components
+│   ├── Header.tsx       # App header with navigation
+│   ├── Footer.tsx       # App footer
+│   └── ThemeSwitcher.tsx # Theme toggle component
+├── hooks/               # Custom React hooks
+├── lib/                 # Utility functions and libraries
+├── pages/               # Application pages
+│   ├── auth/            # Authentication pages
+│   │   ├── Login.tsx    # Login page
+│   │   ├── Signup.tsx   # Signup page
+│   │   └── ResetPassword.tsx # Reset password page
+│   ├── Index.tsx        # Landing page
+│   └── NotFound.tsx     # 404 page
+├── providers/           # Context providers
+│   └── ThemeProvider.tsx # Theme context provider
+├── App.tsx              # Main app component
+└── main.tsx             # Entry point
 ```
 
-**Edit a file directly in GitHub**
+## Features
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- **Authentication**: Complete user authentication flow with Supabase
+- **Database & Storage**: Structured database with row-level security
+- **API Architecture**: Multi-layer microservices architecture
+- **Theme System**: Light/dark mode toggle and theme customization
+- **UI Components**: Responsive UI components powered by shadcn/ui
+- **TypeScript**: Type-safe development
+- **Multi-platform**: Ready for web, iOS, and Android deployment
 
-**Use GitHub Codespaces**
+## Getting Started
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Connect to Supabase:
+   - Click the Supabase button in the Lovable interface
+   - Follow the connection steps to set up your backend
 
-## What technologies are used for this project?
+2. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Add your Supabase, Stripe, and OpenAI API keys
 
-This project is built with:
+3. Customize the application:
+   - Update branding elements in Header and Footer
+   - Modify the theme colors in ThemeProvider
+   - Adjust content on the landing page
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Technologies Used
 
-## How can I deploy this project?
+- **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
+- **State Management**: Redux Toolkit
+- **API**: RESTful API architecture
+- **Authentication**: Supabase Auth
+- **Database**: Supabase PostgreSQL
+- **Payments**: Stripe
+- **AI Integration**: OpenAI
+- **Analytics**: Google Analytics, PostHog (optional)
+- **Customer Support**: Chatwoot (optional)
+- **Email Marketing**: ConvertKit (optional)
 
-Simply open [Lovable](https://lovable.dev/projects/1137485e-7fe7-42f9-90e1-eb7c7df1296b) and click on Share -> Publish.
+## Developer Notes
 
-## Can I connect a custom domain to my Lovable project?
+This template is designed to be a starting point for your SaaS application. The structure follows best practices for scalability and maintainability. Key considerations:
 
-Yes it is!
+- **Separation of Concerns**: UI, state management, and API communication are cleanly separated
+- **TypeScript**: Use TypeScript for type safety and better developer experience
+- **Component Design**: Build reusable components with clear interfaces
+- **Performance**: Optimize for performance with React best practices
+- **Testing**: Add tests for components, hooks, and utilities
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Original Requirements
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+The following instructions were used to create this project:
+
+[FULL PROJECT REQUIREMENTS WILL BE INCLUDED HERE]
