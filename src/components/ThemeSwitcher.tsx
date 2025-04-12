@@ -1,6 +1,7 @@
 
 import { Moon, Sun, PaintBucket } from "lucide-react";
 import { useTheme } from "@/providers/ThemeProvider";
+import { useTheme as useNextTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -40,6 +41,7 @@ const presetThemes = {
 
 export function ThemeSwitcher() {
   const { theme, setMode, setColors } = useTheme();
+  const { setTheme, theme: nextTheme } = useNextTheme();
   const [mounted, setMounted] = useState(false);
 
   // Ensure theme change is only shown after mounting to avoid hydration mismatch
@@ -56,18 +58,20 @@ export function ThemeSwitcher() {
     return null;
   }
 
-  // Updated to handle theme changes from our custom context
+  // Update both theme providers when mode changes
   const handleModeChange = (value: ThemeMode) => {
     setMode(value);
+    setTheme(value);
   };
 
-  console.log("ThemeSwitcher rendering with theme:", theme);
+  // Determine which icon to show based on the next-themes provider
+  const displayedTheme = nextTheme || theme.mode;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="rounded-full">
-          {theme.mode === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          {displayedTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
